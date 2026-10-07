@@ -39,6 +39,7 @@ module "ec2" {
   source = "./modules/ec2"
 
   project           = var.project
+  ami_id            = "ami-0045d7fc2ad003464"
   web_sg_id         = module.security.web_sg_id
   app_sg_id         = module.security.app_sg_id
   keyname           = var.keyname

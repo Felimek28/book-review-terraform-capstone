@@ -17,6 +17,17 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+          "type" : "command",
+          "command": "bash -c '\ncmd=$(cat | python3 -c \"import sys,json; print(json.load(sys.stdin)[\\\"tool_input\\\"][\\\"command\\\"])\")\nif echo \"$cmd\" | grep -q \"terraform apply\"; then\n  report=\"${CLAUDE_PROJECT_DIR}/reports/tf-drift-report.txt\"\n  if [ -f \"$report\" ] && grep -q \"Overall Status: FAIL\" \"$report\"; then\n    echo \"BLOCKED: The latest Terraform drift review reported Overall Status: FAIL. Review and resolve reports/tf-drift-report.txt before running terraform apply.\" >&2\n    exit 2\n  fi\nfi\nexit 0\n'"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
@@ -36,3 +47,4 @@
     ]
   }
 }
+

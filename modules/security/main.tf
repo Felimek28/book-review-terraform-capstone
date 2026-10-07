@@ -29,8 +29,6 @@ resource "aws_security_group_rule" "pub_alb_sg_egress_all" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.pub_alb_sg.id
 }
-
-
 # Security group for web tier EC2 instances.
 resource "aws_security_group" "web_sg" {
 
@@ -38,12 +36,11 @@ resource "aws_security_group" "web_sg" {
   description = "Security group for web servers in the book review app"
   vpc_id      = var.book_review_vpc_id
 
-
   tags = {
-    Name = "${var.project}-web-sg"
+    Name      = "${var.project}-web-sg"
+    TestDrift = "terraform-managed"
   }
 }
-
 # Allows web traffic from the public ALB to web servers.
 resource "aws_security_group_rule" "web_sg_inbound" {
   type                     = "ingress"

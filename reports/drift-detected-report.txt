@@ -1,0 +1,34 @@
+========================================
+Terraform Drift and Policy Review Report
+========================================
+Full Name: Felix Emeka Nwobodo
+Timestamp: 2026-10-07T12:25:12Z
+Terraform Directory: .
+Report File: /c/Users/OWNER/book-review-terraform-capstone/reports/tf-drift-report.txt
+========================================
+
+Running: terraform plan -detailed-exitcode -out=tfplan.out
+
+[WARN] terraform plan exit code 2 — changes are pending and require review
+[PASS] No delete or replace actions found in the plan
+[FAIL] 2 ingress rule(s) would open access to 0.0.0.0/0 or *
+
+========================================
+REPORT SUMMARY
+========================================
+Full Name: Felix Emeka Nwobodo
+Terraform Plan Exit Code: 2
+Terraform Plan Status: WARN - Changes detected and require review
+
+Policy Review:
+PASS: 1
+WARN: 1
+FAIL: 1
+
+Overall Status: FAIL
+Script Exit Code: 2
+Report File: /c/Users/OWNER/book-review-terraform-capstone/reports/tf-drift-report.txt
+
+This script only ran Terraform plan and show commands.
+It never ran terraform apply or terraform destroy.
+========================================

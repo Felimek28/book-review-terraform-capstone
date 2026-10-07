@@ -68,3 +68,8 @@ variable "app_user_data" {
   description = "Rendered user-data script for the app server"
   type        = string
 }
+# Pinned Ubuntu 24.04 AMI used by EC2 instances.
+variable "ami_id" {
+  description = "Pinned Ubuntu 24.04 AMI ID for EC2 instances"
+  type        = string
+}

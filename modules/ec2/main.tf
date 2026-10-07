@@ -1,6 +1,6 @@
 # Web tier EC2 instance placed in the public subnet.
 resource "aws_instance" "web_server" {
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.ami_id
   instance_type               = var.web_instance_type
   vpc_security_group_ids      = [var.web_sg_id]
   key_name                    = var.keyname
@@ -15,7 +15,7 @@ resource "aws_instance" "web_server" {
 
 # App tier EC2 instance placed in the private subnet.
 resource "aws_instance" "app_server" {
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.ami_id
   instance_type               = var.app_instance_type
   vpc_security_group_ids      = [var.app_sg_id]
   key_name                    = var.keyname
@@ -28,33 +28,3 @@ resource "aws_instance" "app_server" {
   }
 }
 
-# Retrieves AWS account metadata for contextual use.
-data "aws_caller_identity" "current" {}
-
-
-# Resolves the latest Ubuntu 24.04 AMI for EC2 instances.
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-
-  filter {
-    name   = "state"
-    values = ["available"]
-  }
-}
